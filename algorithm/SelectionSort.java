@@ -3,13 +3,15 @@ package algorithm;
 
 public class SelectionSort {
     public static void main(String[] args) {
-        int[] a= {2,3,8,6,1,7};
+        int[] a= {2,5,3,0,2,3,0,3};
         // selectionSort(a, a.length-1);
         // bubblesort(a, a.length);
         // insertsort(a, a.length);
         // merge(a, 0, a.length/2 , a.length-1);
         // quicksort(a,0,a.length-1);
-        heapsort(a);
+        // heapsort(a);
+        // max_heap_insert(a, 5);
+        countingsort(a, 6);
         for(int i=0;i<a.length;i++){
             System.out.println(a[i]);
         }
@@ -145,6 +147,39 @@ public class SelectionSort {
             a[0]=a[i];
             a[i]=tmp;
             heapify(a, 0, i-1); //교환한 마지막 값 제외 heap생성
+        }
+    }
+    public static void  max_heap_insert(int[] a, int key) {
+        size = a.length;
+        a[size] = key;
+        int i=size;
+        int parent = (i-1)/2;
+        while(i>1 && a[parent]<a[i]){
+            int tmp = a[i];
+            a[i] = a[parent];
+            a[parent] = tmp;
+            i=parent;
+        }
+    }
+    public static void countingsort(int[] a,int k) {
+        int[] c = new int[k];
+        int[] result = new int[a.length];
+
+        for(int i=0;i<a.length;i++){
+            c[a[i]]++;
+        }
+        for(int i=1;i<c.length;i++){
+            c[i] += c[i-1];
+        }
+        for(int i=a.length-1;i>=0;i--){
+            int num = a[i];
+            int idx = c[num]-1;
+            result[idx] = num;
+            c[num]--;
+        }
+        
+        for(int i=0;i<result.length;i++){
+            a[i] = result[i];
         }
     }
 }
