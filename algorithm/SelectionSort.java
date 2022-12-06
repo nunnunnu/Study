@@ -1,9 +1,13 @@
 package algorithm;
 
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class SelectionSort {
+    static final int BUCKETSIZE = 10;
     public static void main(String[] args) {
-        int[] a= {2,5,3,0,2,3,0,3};
+        // int[] a= {2,5,3,0,2,3,0,3};
+        int[] a = {135,583,691,288,848,937,392,544};
         // selectionSort(a, a.length-1);
         // bubblesort(a, a.length);
         // insertsort(a, a.length);
@@ -11,7 +15,8 @@ public class SelectionSort {
         // quicksort(a,0,a.length-1);
         // heapsort(a);
         // max_heap_insert(a, 5);
-        countingsort(a, 6);
+        // countingsort(a, 6);
+        radix_sort(a.length, a, 3);
         for(int i=0;i<a.length;i++){
             System.out.println(a[i]);
         }
@@ -180,6 +185,26 @@ public class SelectionSort {
         
         for(int i=0;i<result.length;i++){
             a[i] = result[i];
+        }
+    }
+    //n-배열크기, r-자리수
+    public static void radix_sort(int n, int[] a, int r) {
+        Queue<Integer>[] bucket = new LinkedList[BUCKETSIZE];
+        for(int i=0;i<BUCKETSIZE;i++){
+            bucket[i] = new LinkedList<>();
+        }
+        int factor =1;
+
+        for(int i=0;i<r;i++){
+            for(int j=0;j<n;j++){
+                bucket[(a[j]/factor)%10].add(a[j]);
+            }
+            for(int k=0, l=0;k<BUCKETSIZE;k++){
+                while(!bucket[k].isEmpty()){
+                    a[l++] = bucket[k].poll();
+                }
+            }
+            factor*=10;
         }
     }
 }
