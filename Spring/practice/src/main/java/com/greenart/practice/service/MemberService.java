@@ -8,8 +8,12 @@ import com.greenart.practice.domain.MemberRepository;
 import com.greenart.practice.domain.MemoryMemberRepository;
 
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private MemberRepository memberRepository = new MemoryMemberRepository();
     
+    public MemberService(MemberRepository memberRepository){
+        this.memberRepository=memberRepository;
+    }
+
     public Long join(Member member){
         //같은 이름x
         // Optional<Member> result = memberRepository.findByName(member.getName()); 
