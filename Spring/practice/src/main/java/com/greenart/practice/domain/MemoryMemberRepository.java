@@ -11,6 +11,10 @@ public class MemoryMemberRepository implements MemberRepository {
     private static Map<Long, Member> store = new HashMap<>();
     private static long sequence = 0L;
 
+    public void clearStore(){
+        store.clear();
+    }
+
     @Override
     public Member save(Member member) {
         member.setId(++sequence); //멤버 저장시 일련번호 값 1 증가
