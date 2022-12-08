@@ -3,10 +3,13 @@ package com.greenart.practice.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.greenart.practice.domain.Member;
 import com.greenart.practice.domain.MemberRepository;
 import com.greenart.practice.domain.MemoryMemberRepository;
 
+@Service
 public class MemberService {
     private MemberRepository memberRepository = new MemoryMemberRepository();
     

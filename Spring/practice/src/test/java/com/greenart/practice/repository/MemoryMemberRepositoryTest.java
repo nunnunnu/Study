@@ -5,10 +5,12 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Repository;
 
 import com.greenart.practice.domain.Member;
 import com.greenart.practice.domain.MemoryMemberRepository;
 
+@Repository
 public class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();   
 
