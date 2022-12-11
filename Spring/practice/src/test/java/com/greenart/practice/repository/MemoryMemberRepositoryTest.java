@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.greenart.practice.domain.Member;
 import com.greenart.practice.domain.MemoryMemberRepository;
 
-@Repository
 public class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();   
 
