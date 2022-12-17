@@ -29,5 +29,13 @@ public class bookController {
         map.put("review", rService.showReview(seq, page));
         return new ResponseEntity<>(map, (HttpStatus)map.get("code"));
     }
+    @GetMapping("/list")
+    public ResponseEntity<Object> detailBookInfo(
+        @PageableDefault(size=10, sort="sales",direction = Sort.Direction.DESC)  final Pageable page
+    ){
+        Map<String, Object> map = bService.bookBestList(page);
+        return new ResponseEntity<>(map, (HttpStatus)map.get("code"));
+    }
+    
     
 }

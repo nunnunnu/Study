@@ -26,7 +26,7 @@ public class BookEntity {
     @Column(name = "bi_seq") private Long seq;
     @Column(name = "bi_title") private String title;
     @Column(name = "bi_price") private Integer price;
-    @Column(name = "bi_discount") private Double discount;
+    @Column(name = "bi_discount") private String discount;
     @Column(name = "bi_delivery") private String delivery;
     @Column(name = "bi_reg_dt") private Date regDt;
     @Column(name = "bi_pi_seq") private Long publisherNo;

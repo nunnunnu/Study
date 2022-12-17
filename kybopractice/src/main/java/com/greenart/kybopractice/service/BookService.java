@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.greenart.kybopractice.entity.BookEntity;
 import com.greenart.kybopractice.repository.BookRepositroy;
-import com.greenart.kybopractice.repository.ReviewRepository;
 @Service
 public class BookService {
     @Autowired BookRepositroy bookRepo;
-    @Autowired ReviewRepository reviewRepo;
 
     public Map<String, Object> showDetailBookInfo(Long seq, Pageable page){
         Map<String, Object> map = new LinkedHashMap<String, Object>();
@@ -34,6 +32,20 @@ public class BookService {
                 map.put("code", HttpStatus.OK);
                 map.put("bookInfo", book);
             }
+        }
+        return map;
+    }
+    public Map<String, Object> bookBestList(Pageable page){
+        Map<String, Object> map = new LinkedHashMap<>();
+        if(bookRepo.count()==0){
+            map.put("status", false);
+            map.put("message", "아직 등록된 책이 존재하지않습니다.");
+            map.put("code", HttpStatus.NO_CONTENT); 
+        }else{
+            map.put("status", true);
+            map.put("message", "베스트 리스트 조회를 성공했습니다.");
+            map.put("list", bookRepo.findAllByOrderBySalesDesc(page));
+            map.put("code", HttpStatus.OK); 
         }
         return map;
     }
