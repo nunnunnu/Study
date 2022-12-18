@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Immutable
-@Table(name = "book_detail_view")
+@Immutable //뷰랑 연결할때 입력을 막기위해 넣어주는 어노테이션
+@Table(name = "book_detail_view") 
 public class BookEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bi_seq") private Long seq;
@@ -41,5 +41,5 @@ public class BookEntity {
     @Column(name = "point") private Integer Point;
     @Column(name = "review_count") private Integer reviewCnt;
     @Column(name = "ci_path") private String coverImage;
-
+    @Column(name = "pi_name") private String publisherName;
 }

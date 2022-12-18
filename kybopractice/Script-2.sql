@@ -161,11 +161,11 @@ VALUES
 select * from book_writer_info a join author_info b on a.bwi_ai_seq = b.ai_seq ;
 
 -- 책 상세정보 페이지(책 정보) - 뷰 생성
-CREATE or replace VIEW book_detail_view as
+-- CREATE or replace view book_detail_view as
 select  a.bi_seq ,a.bi_title ,a.bi_price ,concat(a.bi_discount *100,'%') as bi_discount,a.bi_delivery 
 	,a.bi_reg_dt ,a.bi_pi_seq ,a.bi_ti_seq ,a.bi_sales 
 	, b.bti_intro, c.bii_image, d.bti_name, e.ai_name,f.score, a.bi_price*(1-a.bi_discount) as discount_price,
-	a.bi_price*(1-a.bi_discount)*0.05 as point , f.review_count, g.ci_path 
+	a.bi_price*(1-a.bi_discount)*0.05 as point , f.review_count, g.ci_path , j.pi_name 
 from book_info a 
 join book_text_intro b on b.bti_bi_seq = a.bi_seq 
 join book_intro_image c on c.bii_bi_seq =a.bi_seq 
@@ -174,11 +174,12 @@ join (
 select h.bwi_bi_seq, group_concat(ai_name) as ai_name  from book_writer_info h join author_info i on h.bwi_ai_seq = i.ai_seq
 group by h.bwi_bi_seq
 ) e on e.bwi_bi_seq = a.bi_seq 
-join (
+left outer join (
 select avg(ri_score) as score, count(*) as review_count, ri_bi_seq  from review_info 
 group by ri_bi_seq
 ) f on f.ri_bi_seq = a.bi_seq
-join cover_image g on g.ci_bi_seq = a.bi_seq ;
+join cover_image g on g.ci_bi_seq = a.bi_seq 
+join publisher_info j on j.pi_seq = a.bi_pi_seq ;
 -- where a.bi_seq = 1;
 -- 책 상세정보 페이지(리뷰 전체 출력)
 -- create view review_info_view as
@@ -189,11 +190,15 @@ join member_info b on a.ri_mi_seq =b.mi_seq
 create or replace 'auth/er_info_view' as 
 select * from book_writer_info a join author_info b on a.bwi_ai_seq = b.ai_seq;
 
+-- delete from author_info where ai_seq >4;
 
+select * from publisher_info pi2 ;
 select  * from book_translator_info bti ;
 select * from book_info bi ;
 select  * from review_info ri ;
 select  * from cover_image ci ;
+select * from book_writer_info bwi ;
+select * from author_info ai ;
 
 -- 책 리스트
 -- create view book_list as
@@ -218,7 +223,12 @@ desc book_detail_view ;
 
 
 select * from book_writer_info bwi ;
-select * from book_detail_view ;
 
 select h.bwi_bi_seq, group_concat(ai_name)  from book_writer_info h join author_info i on h.bwi_ai_seq = i.ai_seq
 group by h.bwi_bi_seq;
+
+select * from member_info mi;
+
+-- insert into cover_image (ci_path, ci_bi_seq)
+-- values
+-- ('cover3.jpg',3);
