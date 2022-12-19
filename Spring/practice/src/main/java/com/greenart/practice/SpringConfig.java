@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.greenart.practice.aop.TimeTraceAop;
 import com.greenart.practice.domain.MemberRepository;
 import com.greenart.practice.service.MemberService;
 
@@ -17,8 +18,12 @@ public class SpringConfig {
         this.memberRepository = memberRepository;
     }
 
-    // @Bean
+    @Bean
     public MemberService memberService() {
         return new MemberService(memberRepository);
     }
+    // @Bean
+    // public TimeTraceAop timeTraceAop(){
+    //     return new TimeTraceAop();
+    // }
 }
