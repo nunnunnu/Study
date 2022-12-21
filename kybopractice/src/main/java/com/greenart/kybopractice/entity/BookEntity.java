@@ -11,6 +11,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,7 @@ public class BookEntity {
     @Column(name = "bi_price") private Integer price;
     @Column(name = "bi_discount") private String discount;
     @Column(name = "bi_delivery") private String delivery;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Column(name = "bi_reg_dt") private Date regDt;
     @Column(name = "bi_pi_seq") private Long publisherNo;
     @Column(name = "bi_ti_seq") private Long translatorNo;

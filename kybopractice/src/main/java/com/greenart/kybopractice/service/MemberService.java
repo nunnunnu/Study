@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.greenart.kybopractice.entity.MemberInfoEntity;
 import com.greenart.kybopractice.repository.MemberRepository;
-import com.jh_project.todo.utils.AESAlgorithm;
+import com.greenart.kybopractice.utils.AESAlgorithm;
 
 @Controller
 public class MemberService {
