@@ -192,10 +192,17 @@ join cover_image g on g.ci_bi_seq = a.bi_seq
 join publisher_info j on j.pi_seq = a.bi_pi_seq ;
 -- where a.bi_seq = 1;
 -- -- 책 상세정보 페이지(리뷰 전체 출력)
--- create view review_info_view as
-select a.*, b.mi_id from review_info a
-join member_info b on a.ri_mi_seq =b.mi_seq ;
+-- create or REPLACE view review_info_view as
+select a.*, REGEXP_REPLACE(b.mi_id, '(?<=.{2}).', '*') as mi_id
+from review_info a
+join member_info b on a.ri_mi_seq =b.mi_seq
+order by ri_bi_seq ;
 --  -- offset은 (1*page)-1 로 연산하면 될거같음!!
+
+SELECT * from book_writer_info bwi;
+
+SELECT * from publisher_info pi3 ;
+SELECT  bwi_ai_seq  from book_writer_info a;
 -- 
 -- create or replace 'auth/er_info_view' as 
 -- select * from book_writer_info a join author_info b on a.bwi_ai_seq = b.ai_seq;

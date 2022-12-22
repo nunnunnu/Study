@@ -4,10 +4,13 @@ import com.hello.core.Member.Grade;
 import com.hello.core.Member.Member;
 import com.hello.core.Member.MemberService;
 import com.hello.core.Member.MemberServiceImpl;
+import com.hello.core.order.Appconfig;
 
 public class MemberApp {
     public static void main(String[] args) {
-        MemberService mService = new MemberServiceImpl();
+        Appconfig appconfig = new Appconfig();
+        // MemberService mService = new MemberServiceImpl(null);
+        MemberService mService = appconfig.memberService();
         Member member = new Member(1L,"MemberA",Grade.VIP);
         mService.join(member);
         System.out.println(mService.findMember(1L));
