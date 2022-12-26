@@ -3,7 +3,6 @@ package com.hello.core;
 import com.hello.core.Member.Grade;
 import com.hello.core.Member.Member;
 import com.hello.core.Member.MemberService;
-import com.hello.core.Member.MemberServiceImpl;
 import com.hello.core.order.Appconfig;
 
 public class MemberApp {
