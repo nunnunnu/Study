@@ -7,4 +7,5 @@ import com.greenart.kybopractice.entity.PublisherInfoEntity;
 @Repository
 public interface PublisherInfoRepository extends JpaRepository<PublisherInfoEntity, Long> {
     PublisherInfoEntity findByPublisherName(String name);
+    PublisherInfoEntity findByPublisherSeq(Long seq);
 }

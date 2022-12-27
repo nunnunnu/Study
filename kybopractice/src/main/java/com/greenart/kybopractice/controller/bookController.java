@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.greenart.kybopractice.entity.BookInfoEntity;
+import com.greenart.kybopractice.entity.PublisherInfoEntity;
 import com.greenart.kybopractice.repository.BookInfoRepository;
+import com.greenart.kybopractice.repository.PublisherInfoRepository;
 import com.greenart.kybopractice.service.BookService;
 import com.greenart.kybopractice.service.ReviewService;
 
@@ -30,6 +32,7 @@ public class bookController {
     @Autowired BookService bService;
     @Autowired ReviewService rService;
     @Autowired BookInfoRepository biRepo;
+    @Autowired PublisherInfoRepository pRepo;
 
     @GetMapping("/detail")
     public ResponseEntity<Object> detailBookInfo(@RequestParam Long seq,
@@ -77,6 +80,13 @@ public class bookController {
         List<BookInfoEntity> list = biRepo.findAll();
         System.out.println(list);
         map.put("book", list);
+        return map;
+    }
+    @GetMapping("/pub")
+    public Map<String,Object> getPub(@RequestParam Long seq){
+        Map<String, Object> map = new LinkedHashMap<>();
+        PublisherInfoEntity p = pRepo.findByPublisherSeq(seq);
+        map.put("info", p);
         return map;
     }
 }
