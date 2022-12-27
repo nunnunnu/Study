@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,6 @@ public class PublisherInfoEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pi_seq") private Long publisherSeq;
     @Column(name = "pi_name") private String publisherName;
-    @OneToMany(mappedBy="publisherSeq")
-    private List<BookInfoEntity> books = new ArrayList<>();
+    @OneToMany(mappedBy="publisherSeq") @Transient
+    private List<BookInfoEntity> books = new ArrayList<BookInfoEntity>();
 }

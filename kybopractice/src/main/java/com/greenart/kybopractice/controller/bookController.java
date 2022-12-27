@@ -86,6 +86,8 @@ public class bookController {
     public Map<String,Object> getPub(@RequestParam Long seq){
         Map<String, Object> map = new LinkedHashMap<>();
         PublisherInfoEntity p = pRepo.findByPublisherSeq(seq);
+        // System.out.println(p);
+        
         map.put("info", p);
         return map;
     }
