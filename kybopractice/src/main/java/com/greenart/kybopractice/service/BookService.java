@@ -117,10 +117,10 @@ public class BookService {
                 tran = new BookTranslatorEntity();
                 tran.setTranslatorName(translatorName);
                 tran = tranRepository.save(tran);
-                book = new BookInfoEntity(null, title, price, discount, delivery, date, pub.getPublisherSeq(), tran.getTranslatorSeq(), sales);
+                // book = new BookInfoEntity(null, title, price, discount, delivery, date, pub.getPublisherSeq(), tran.getTranslatorSeq(), sales);
             }
         }else{
-            book = new BookInfoEntity(null, title, price, discount, delivery, date, pub.getPublisherSeq(), null, sales);
+            // book = new BookInfoEntity(null, title, price, discount, delivery, date, pub.getPublisherSeq(), null, sales);
         }
         book = biRepo.save(book);
         System.out.println(book);

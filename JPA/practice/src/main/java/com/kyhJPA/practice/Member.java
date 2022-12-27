@@ -1,25 +1,58 @@
 package com.kyhJPA.practice;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 @Entity
 public class Member {
-    @Id
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
-    @Column(name = "name")
+    @Column(name = "USERNAME")
     private String username;
-    private Integer age;
-    @Enumerated(EnumType.STRING) //DB에는 enum타입이 없어서 붙여주는 어노테이션
-    private RoleType roleType;
-    @Temporal(TemporalType.TIMESTAMP) //DB에서는 날짜타입이 DATE, TIME, TIMESTAMP 세가지가 있음. 타입을 지정해줌
-    private Date createdDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-    @Lob //varchar보다 큰 데이터를 담고싶을
-    private String description;
-    //Getter, Setter… 
-    @Transient
-    private int temp;
+    
+    // @Column(name = "TEAM_ID")
+    // private Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
+
+    public Team getTeam() {
+        return this.team;
+    }
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    // public Long getTeamId() {
+    //     return this.teamId;
+    // }
+
+    // public void setTeamId(Long teamId) {
+    //     this.teamId = teamId;
+    // }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    @Override
+    public String toString() {
+        return id+","+username+","+team.getName()+","+team.getId();
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public Member(){
+
+    }
+    
 }

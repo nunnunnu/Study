@@ -2,9 +2,8 @@ package com.greenart.kybopractice.controller;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.greenart.kybopractice.entity.BookInfoEntity;
+import com.greenart.kybopractice.repository.BookInfoRepository;
 import com.greenart.kybopractice.service.BookService;
 import com.greenart.kybopractice.service.ReviewService;
 
@@ -28,6 +29,7 @@ import com.greenart.kybopractice.service.ReviewService;
 public class bookController {
     @Autowired BookService bService;
     @Autowired ReviewService rService;
+    @Autowired BookInfoRepository biRepo;
 
     @GetMapping("/detail")
     public ResponseEntity<Object> detailBookInfo(@RequestParam Long seq,
@@ -68,5 +70,13 @@ public class bookController {
         map.put("message", "책 정보가 등록되었습니다.");
         return map;
     }
-    
+    @GetMapping("/")
+    public Map<String, Object> bookInfo(){
+        Map<String, Object> map = new LinkedHashMap<>();
+        System.out.println("aaaa");
+        List<BookInfoEntity> list = biRepo.findAll();
+        System.out.println(list);
+        map.put("book", list);
+        return map;
+    }
 }

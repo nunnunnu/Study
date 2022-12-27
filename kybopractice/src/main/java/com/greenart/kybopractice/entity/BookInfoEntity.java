@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +28,7 @@ public class BookInfoEntity {
     @Column(name = "bi_discount") private Double bookdiscount;
     @Column(name = "bi_delivery") private String bookDelivery;
     @Column(name = "bi_reg_dt") private Date BookRegDt;
-    @Column(name = "bi_pi_seq") private Long publisherSeq;
+    @ManyToOne @JoinColumn(name="bi_pi_seq") private PublisherInfoEntity publisherSeq;
     @Column(name = "bi_ti_seq") private Long translatorSeq;
     @Column(name = "bi_sales") private Integer BookSales;
 } 
