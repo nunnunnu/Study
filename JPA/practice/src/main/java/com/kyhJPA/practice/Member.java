@@ -13,7 +13,7 @@ public class Member {
     // private Long teamId;
 
     @ManyToOne
-    @JoinColumn(name="TEAM_ID")
+    @JoinColumn(name="TEAM_ID", insertable = false, updatable = false) //읽기전
     private Team team;
 
     public void setTeam(Team team) {

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -16,7 +17,7 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team") //Member클래스의 멤버변수 team과 연결되어있음
+    @OneToMany() @JoinColumn(name="TEAM_ID") //Member클래스의 멤버변수 team과 연결되어있음
     private List<Member> members = new ArrayList<Member>();
 
     public void addMember(Member member){
@@ -48,5 +49,9 @@ public class Team {
         this.name = name;
     }
 
+    @Override
+    public String toString(){
+        return "";
+    }
 
 }

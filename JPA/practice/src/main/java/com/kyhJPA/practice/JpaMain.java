@@ -16,28 +16,16 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-        Team t = new Team();
-        t.setName("teamG");
-        em.persist(t);
+            Member member = new Member();
+            member.setUsername("member0");
+            em.persist(member);
 
-        Member m = new Member();
-        m.setUsername("member7");
-        em.persist(m);
-        t.addMember(m);
-        em.flush();
-        em.clear();
-        System.out.println(m);
-        Team findTeam = em.find(Team.class, t.getId());
-        List<Member> members = findTeam.getMembers();
-        Member findMember = em.find(Member.class, m.getId());
-        // Team team = findMember.getTeam();
-        // List<Member> members = findMember.getTeam().getMembers();
-        System.out.println("== ============");
-        System.out.println("members = "+ findTeam);
-        System.out.println("==============");
-        for(Member mem : members){
-            System.out.println(mem);
-        }
+            Team team = new Team();
+            team.setName("Team0");
+            team.getMembers().add(member); //team테이블이 아닌 member테이블의 team_id에 값이 들어감 update구문 
+            //권장하지 않는 이유. team을 보냈는데 member테이블이 update됨
+
+            em.persist(team);
         
         tx.commit();
         }catch(Exception e){
