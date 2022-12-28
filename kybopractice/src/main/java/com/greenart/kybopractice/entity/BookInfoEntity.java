@@ -29,6 +29,6 @@ public class BookInfoEntity {
     @Column(name = "bi_delivery") private String bookDelivery;
     @Column(name = "bi_reg_dt") private Date BookRegDt;
     @ManyToOne @JoinColumn(name="bi_pi_seq") private PublisherInfoEntity publisherSeq;
-    @Column(name = "bi_ti_seq") private Long translatorSeq;
+    @ManyToOne @JoinColumn(name="bi_ti_seq") private BookTranslatorEntity translatorSeq;
     @Column(name = "bi_sales") private Integer BookSales;
 } 

@@ -17,23 +17,26 @@ public class JpaMain {
         tx.begin();
         try{
         Team t = new Team();
-        t.setName("teamF");
+        t.setName("teamG");
         em.persist(t);
 
         Member m = new Member();
-        m.setUsername("member6");
-        m.setTeam(t);
+        m.setUsername("member7");
         em.persist(m);
+        t.addMember(m);
         em.flush();
         em.clear();
         System.out.println(m);
+        Team findTeam = em.find(Team.class, t.getId());
+        List<Member> members = findTeam.getMembers();
         Member findMember = em.find(Member.class, m.getId());
-        Team team = findMember.getTeam();
-        List<Member> members = findMember.getTeam().getMembers();
-        System.out.println(team);
-        System.out.println(team.getName());
+        // Team team = findMember.getTeam();
+        // List<Member> members = findMember.getTeam().getMembers();
+        System.out.println("== ============");
+        System.out.println("members = "+ findTeam);
+        System.out.println("==============");
         for(Member mem : members){
-            System.out.println(mem.getUsername());
+            System.out.println(mem);
         }
         
         tx.commit();

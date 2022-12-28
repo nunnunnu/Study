@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import com.greenart.kybopractice.entity.BookInfoEntity;
 @Repository
 public interface BookInfoRepository extends JpaRepository<BookInfoEntity, Long> {
-    
+    BookInfoEntity findByBookSeq(Long seq);
 }

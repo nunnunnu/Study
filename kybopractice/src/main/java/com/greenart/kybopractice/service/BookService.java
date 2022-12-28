@@ -2,7 +2,6 @@ package com.greenart.kybopractice.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
+import com.greenart.kybopractice.VO.BookInfoVO;
 import com.greenart.kybopractice.entity.AutherInfoEntity;
-import com.greenart.kybopractice.entity.BookEntity;
 import com.greenart.kybopractice.entity.BookInfoEntity;
 import com.greenart.kybopractice.entity.BookIntroEntity;
 import com.greenart.kybopractice.entity.BookTextIntro;
@@ -53,16 +52,18 @@ public class BookService {
             map.put("message", "아직 등록된 책이 존재하지않습니다.");
             map.put("code", HttpStatus.NO_CONTENT); 
         }else{
-            BookEntity book = bookRepo.findBySeq(seq);
+            BookInfoEntity book = biRepo.findByBookSeq(seq);
             if(book==null){
                 map.put("status", false);
                 map.put("message", "일치하는 책이 존재하지 않습니다. 책번호를 다시 확인해주세요");
                 map.put("code", HttpStatus.BAD_REQUEST);
             }else{
+                BookInfoVO bookVO = new BookInfoVO(book);
+                System.out.println(bookVO.getDiscountPrice());
                 map.put("status", true);
                 map.put("message", "책을 조회했습니다.");
                 map.put("code", HttpStatus.OK);
-                map.put("bookInfo", book);
+                map.put("bookInfo", bookVO);
             }
         }
         return map;

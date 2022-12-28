@@ -16,8 +16,13 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team") //Member클래스의 멤버변수 team과 연결되어있
+    @OneToMany(mappedBy = "team") //Member클래스의 멤버변수 team과 연결되어있음
     private List<Member> members = new ArrayList<Member>();
+
+    public void addMember(Member member){
+        member.setTeam(this);
+        members.add(member);
+    }
 
     public List<Member> getMembers() {
         return this.members;

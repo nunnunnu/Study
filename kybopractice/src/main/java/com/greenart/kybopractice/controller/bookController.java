@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.greenart.kybopractice.VO.BookInfoVO;
+import com.greenart.kybopractice.VO.PublisherInfoVO;
 import com.greenart.kybopractice.entity.BookInfoEntity;
 import com.greenart.kybopractice.entity.PublisherInfoEntity;
 import com.greenart.kybopractice.repository.BookInfoRepository;
@@ -85,10 +87,11 @@ public class bookController {
     @GetMapping("/pub")
     public Map<String,Object> getPub(@RequestParam Long seq){
         Map<String, Object> map = new LinkedHashMap<>();
-        PublisherInfoEntity p = pRepo.findByPublisherSeq(seq);
-        // System.out.println(p);
+        PublisherInfoVO p = pRepo.findByPublisherSeq(seq);
+        // BookInfoVO b = new BookInfoVO()
+        System.out.println(p);
         
-        map.put("info", p);
+        // map.put("info", p.toString());
         return map;
     }
 }
