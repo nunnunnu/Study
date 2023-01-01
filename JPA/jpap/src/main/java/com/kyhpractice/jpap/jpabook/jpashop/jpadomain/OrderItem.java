@@ -3,6 +3,7 @@ package com.kyhpractice.jpap.jpabook.jpashop.jpadomain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,13 +16,13 @@ public class OrderItem {
 
     // @Column(name = "ORDER_ID")
     // private Long orderId;
-    @ManyToOne @JoinColumn(name="ORDER_ID")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name="ORDER_ID")
     private Order order;
 
     
     // @Column(name = "ITEM_ID")
     // private Long itemId;
-    @ManyToOne @JoinColumn(name="ITEM_ID")
+    @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name="ITEM_ID")
     private Item item;
 
     

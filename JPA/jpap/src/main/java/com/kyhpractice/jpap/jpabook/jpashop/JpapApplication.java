@@ -1,4 +1,4 @@
-package com.kyhpractice.jpap;
+package com.kyhpractice.jpap.jpabook.jpashop;
 
 public class JpapApplication {
 

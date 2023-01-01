@@ -47,8 +47,8 @@ public class bookController {
         return new ResponseEntity<>(map, (HttpStatus)map.get("code"));
     }
     @GetMapping("/list")
-    public ResponseEntity<Object> detailBookInfo(
-        @PageableDefault(size=10, sort="sales",direction = Sort.Direction.DESC)  final Pageable page
+    public ResponseEntity<Object> listBookInfo(
+        @PageableDefault(size=10, sort="bookSales",direction = Sort.Direction.DESC) Pageable page
     ){
         Map<String, Object> map = bService.bookBestList(page);
         return new ResponseEntity<>(map, (HttpStatus)map.get("code"));

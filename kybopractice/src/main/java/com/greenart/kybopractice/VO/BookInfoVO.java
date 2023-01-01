@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenart.kybopractice.entity.BookInfoEntity;
 import com.greenart.kybopractice.entity.BookTranslatorEntity;
 import com.greenart.kybopractice.entity.PublisherInfoEntity;
@@ -24,6 +25,7 @@ public class BookInfoVO {
     private Double bookdiscount;
     private String bookDelivery;
     private Date BookRegDt;
+    @JsonIgnore
     private PublisherInfoEntity publisher;
     private BookTranslatorEntity translator;
     private Integer BookSales;
