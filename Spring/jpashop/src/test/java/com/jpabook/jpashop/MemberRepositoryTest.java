@@ -2,7 +2,6 @@ package com.jpabook.jpashop;
 
 import javax.transaction.Transactional;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,9 +9,9 @@ import org.springframework.test.annotation.Rollback;
 
 import com.jpabook.jpashop.domain.Member;
 
+
 @SpringBootTest
 public class MemberRepositoryTest {
-    @Autowired Repository memberRepository;
 
     @Test
     @Rollback(false) //rollback안하고 commit해버림
