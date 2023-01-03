@@ -19,12 +19,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.jpabook.jpashop.repository.OrderRepository;
+import com.jpabook.jpashop.service.OrderService;
+
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name="orders")
 @Getter@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
     @Id @GeneratedValue
     @Column(name="order_id")
@@ -56,4 +62,40 @@ public class Order {
         this.delivery = delivery;
         delivery.setOrder(this);
     }
+    //주문
+    public static Order createOrder(Member member, Delivery delivery, OrderItem...orderItems){
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for(OrderItem orderItem: orderItems){
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+        return order;
+    }
+    //주문 취소
+    public void cancel(){
+        if(delivery.getStatus()==DeliveryStatus.COMP){
+            throw new IllegalStateException("이미 배송 완료된 상품은 취소가 불가능합니다.");
+        }
+        this.setStatus(OrderStatus.CANCLE);
+        for(OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
+    }
+
+    //전체 주문 조회
+    public int getTotalPrice(){
+        int totalPrice=0;
+        for(OrderItem orderItem : orderItems){
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return totalPrice;
+    }
+
+    //검색
+    // public List<Order> findOrders(OrderSearch orderSearch){
+    //     return OrderRepository.findAll(orderSearch);
+    // }
 }
