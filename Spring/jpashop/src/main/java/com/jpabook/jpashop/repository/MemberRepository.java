@@ -3,16 +3,18 @@ package com.jpabook.jpashop.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
 import com.jpabook.jpashop.domain.Member;
 
+import lombok.RequiredArgsConstructor;
+
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
-    @PersistenceContext
-    private EntityManager em;
+    // @PersistenceContext 스프링 부트 라이브러리를 사용하면 @Autowired로 변경가능 -> @RequiredArgsConstructor 사용가능
+    private final EntityManager em;
 
     public void save(Member member){
         em.persist(member);
