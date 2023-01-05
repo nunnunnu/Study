@@ -108,6 +108,8 @@ select * from drink_info di ;
 select * from menu_info mi ;
 select * from event_info ei ;
 
+select * from member_info mi ;
+
 
 INSERT INTO burger_wang.menu_info
 (menu_name, menu_price, menu_file, menu_uri, menu_reg_dt, menu_sales_rate, menu_ex, menu_bi_seq, menu_side_seq, menu_di_seq, menu_dog_seq, menu_size, menu_select)
@@ -140,10 +142,12 @@ select * from dog_info di ;
 -- alter table menu_info drop menu_reg_dt;
 -- alter table ingredients_info drop ii_mi_seq;
 -- 
--- alter table burger_info add bi_reg_dt datetime null default now();
+alter table order_detail add od_ldot2_seq int null;
 -- alter table ingredients_info add ii_menu_seq int null;
 
 -- update burger_info set bi_sales_rate=bi_seq+100;
+
+select * from member_info mi ;
 
 select * from burger_info bi ;
 
@@ -246,4 +250,6 @@ VALUES
 (10, 9, 100);
 
 select * from event_stock;
+
+select * from my_delivery md ;
 
