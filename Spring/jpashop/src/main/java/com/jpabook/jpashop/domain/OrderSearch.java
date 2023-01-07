@@ -1,5 +1,9 @@
 package com.jpabook.jpashop.domain;
 
+import java.util.List;
+
+import com.jpabook.jpashop.repository.OrderRepository;
+
 import lombok.Getter;
 import lombok.Setter;
 

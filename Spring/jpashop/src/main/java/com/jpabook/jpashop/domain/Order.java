@@ -19,9 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.jpabook.jpashop.repository.OrderRepository;
-import com.jpabook.jpashop.service.OrderService;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -79,7 +76,7 @@ public class Order {
         if(delivery.getStatus()==DeliveryStatus.COMP){
             throw new IllegalStateException("이미 배송 완료된 상품은 취소가 불가능합니다.");
         }
-        this.setStatus(OrderStatus.CANCLE);
+        this.setStatus(OrderStatus.CANCEL);
         for(OrderItem orderItem : orderItems){
             orderItem.cancel();
         }

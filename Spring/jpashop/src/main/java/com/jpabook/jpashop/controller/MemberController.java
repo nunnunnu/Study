@@ -1,5 +1,7 @@
 package com.jpabook.jpashop.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -37,5 +39,12 @@ public class MemberController {
           member.setAddress(address);
           memberService.join(member);
           return "redirect:/";
+     }
+     @GetMapping("/members")
+     public String list(Model model){
+          List<Member> members = memberService.findMembers();
+          model.addAttribute("members", members);
+
+          return "members/memberList";
      }
 }

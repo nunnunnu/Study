@@ -38,12 +38,17 @@ public class MemberService {
           }
      }
      //회원 전체 조회
-     @Transactional(readOnly = true) //읽기 모드. 데이터 변경안됨(성능상 좋음)
-     public List<Member> findMembers(){
+     // @Transactional(readOnly = true) //읽기 모드. 데이터 변경안됨(성능상 좋음)
+     public List<Member> findMembers() {
           return memberRepository.findAll();
      }
      @Transactional(readOnly = true) //읽기 모드. 데이터 변경안됨(성능상 좋음)
      public Member findOne(Long memberId){
           return memberRepository.findOne(memberId);
+     }
+     @Transactional
+     public void update(Long id, String name) {
+          Member member = memberRepository.findOne(id);
+          member.setName(name);
      }
 }

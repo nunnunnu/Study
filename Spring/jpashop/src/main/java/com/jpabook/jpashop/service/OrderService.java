@@ -1,5 +1,7 @@
 package com.jpabook.jpashop.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -7,6 +9,7 @@ import com.jpabook.jpashop.domain.Delivery;
 import com.jpabook.jpashop.domain.Member;
 import com.jpabook.jpashop.domain.Order;
 import com.jpabook.jpashop.domain.OrderItem;
+import com.jpabook.jpashop.domain.OrderSearch;
 import com.jpabook.jpashop.domain.item.Item;
 import com.jpabook.jpashop.repository.ItemRepository;
 import com.jpabook.jpashop.repository.MemberRepository;
@@ -20,11 +23,11 @@ import lombok.RequiredArgsConstructor;
 public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
     //주문
     @Transactional
     public Long order(Long memberId, Long itemId, int count){
-        Member member = memberRepository.findOne(itemId);
+        Member member = memberRepository.findOne(memberId);
         Item item = itemRepository.findOne(itemId);
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
@@ -43,5 +46,9 @@ public class OrderService {
         int totalPrice = 0;
         Order order = orderRepository.findOne(OrderId);
         order.cancel();
+    }
+
+    public List<Order> findOrders(OrderSearch orderSearch) {
+        return orderRepository.findAllByString(orderSearch);
     }
 }
