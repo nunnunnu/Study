@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jpabook.jpashop.domain.item.Item;
 
@@ -17,6 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@BatchSize(size=1000)
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) //기본생성자 쓰지말라는 의미.
